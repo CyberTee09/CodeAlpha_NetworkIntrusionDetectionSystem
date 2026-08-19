@@ -1,0 +1,6 @@
+*.log
+*.json
+*.pcap
+*.pcapng
+*.key
+*.pem
