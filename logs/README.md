@@ -1,21 +1,36 @@
-# Suricata Log Summary
+# Suricata and Wazuh Log Summary
 
-Suricata generated the following log files during testing:
+Suricata generated network security events during the testing and monitoring stages of the project.
 
-- `eve.json` — network events and flow records
-- `stats.log` — traffic and engine statistics
-- `suricata.log` — Suricata operational messages
-- `fast.log` — alert log
+## Suricata Log Files
 
-During the final network capture:
+The main Suricata log files used during the implementation included:
 
-- Interface: eth0
-- Packets captured: 886
-- Packets dropped: 0
-- Invalid checksums: 0
+* `eve.json` — structured network events and security alerts.
+* `stats.log` — Suricata traffic and engine statistics.
+* `suricata.log` — Suricata operational and service messages.
+* `fast.log` — alert information where applicable.
 
-The captured events included normal mDNS and DHCP traffic.
+The primary log used for the Wazuh integration was:
 
-No alert event was generated during the normal traffic test.
+```text
+/var/log/suricata/eve.json
+```
 
-Raw Suricata logs are not included in this public repository to avoid unnecessarily exposing network information.
+## Wazuh Monitoring
+
+The Suricata EVE JSON events were monitored by Wazuh.
+
+A Suricata event was successfully observed in the Wazuh alert data with:
+
+* **Rule ID:** 86601
+* **Alert Level:** 3
+* **Event:** ET POLICY Possible Kali Linux hostname in DHCP Request Packet
+
+This confirmed that Suricata was generating security events and that the events were being received and analysed by Wazuh.
+
+## Log Privacy
+
+Raw Suricata and Wazuh logs are not included in this public repository because they may contain network addresses, host information or other environment-specific information.
+
+The repository therefore contains documentation describing the relevant logs and the results observed during testing rather than publishing the complete raw log files.
