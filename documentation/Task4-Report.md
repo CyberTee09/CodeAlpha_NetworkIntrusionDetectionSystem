@@ -133,6 +133,7 @@ Wazuh Active Response was configured to automatically respond to detected securi
 
 The configuration used was:
 
+
 ```xml
 <active-response>
   <disabled>no</disabled>
@@ -141,7 +142,9 @@ The configuration used was:
   <level>10</level>
   <timeout>60</timeout>
 </active-response>
-
+```text
+Rule ID: 86601
+```
 Configuration Details
 Active Response: Enabled
 Command: firewall-drop
@@ -151,9 +154,9 @@ Timeout: 60 seconds
 
 The response was configured with a level threshold of 10 so that the firewall-drop action would only be triggered for alerts meeting the configured severity level, helping to avoid unnecessary responses to lower-level events.
 
-Screenshots 17 and 18 provide evidence of the Active Respo
+Screenshots 17 and 18 provide evidence of the Active Response configuration.
 
-## 9. Wazuh Manager Verification
+# 9. Wazuh Manager Verification
 
 After making the configuration changes, the Wazuh Manager was checked to ensure that it remained active.
 
@@ -163,19 +166,13 @@ Wazuh logs were also checked during troubleshooting and verification.
 
 Suricata-related entries were observed in the Wazuh logs, confirming that Suricata events were reaching the Wazuh monitoring environment.
 
-## 10. Wazuh Dashboard Monitoring
+ # 10. Network Monitoring and Alert Visualization
 
-The Wazuh Dashboard was used to view and analyse the Suricata events received by Wazuh.
+Suricata was monitored while network traffic was being generated. Suricata events were collected and forwarded to Wazuh for analysis.
 
-The Suricata event was located using the relevant Wazuh alert data.
+The Wazuh dashboard was used to visualize Suricata alert activity and confirm that events were being received and displayed.
 
-The observed rule included:
-
-```text
-Rule ID: 86601
-```
-
-The event demonstrated that Wazuh was successfully displaying Suricata-generated security information.
+Screenshot 19 shows the Suricata alerts visualization over time.
 
 ## 11. Suricata Alert Visualization
 
