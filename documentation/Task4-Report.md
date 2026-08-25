@@ -129,33 +129,29 @@ The Suricata entries were also identified in the Wazuh alert logs.
 
 ## 8. Wazuh Active Response Configuration
 
-Wazuh Active Response was configured to provide an automated response mechanism when a rule triggers an appropriate alert.
+Wazuh Active Response was configured to automatically respond to detected security events using the `firewall-drop` command.
 
-The `firewall-drop` command was configured as the Active Response command.
-
-The command configuration was:
-
-```xml
-<command>
-  <name>firewall-drop</name>
-  <executable>firewall-drop</executable>
-  <timeout_allowed>yes</timeout_allowed>
-</command>
-```
-
-An Active Response configuration was also added:
+The configuration used was:
 
 ```xml
 <active-response>
+  <disabled>no</disabled>
   <command>firewall-drop</command>
   <location>local</location>
+  <level>10</level>
   <timeout>60</timeout>
 </active-response>
-```
 
-The Active Response configuration was checked while the Wazuh Manager was running.
+Configuration Details
+Active Response: Enabled
+Command: firewall-drop
+Location: local
+Alert Level: 10
+Timeout: 60 seconds
 
-The configuration provides a mechanism for Wazuh to use `firewall-drop` as an automated response when the configured conditions are met.
+The response was configured with a level threshold of 10 so that the firewall-drop action would only be triggered for alerts meeting the configured severity level, helping to avoid unnecessary responses to lower-level events.
+
+Screenshots 17 and 18 provide evidence of the Active Respo
 
 ## 9. Wazuh Manager Verification
 
