@@ -133,28 +133,28 @@ Wazuh Active Response was configured to automatically respond to detected securi
 
 The configuration used was:
 
-
 ```xml
+<!-- Define the firewall-drop command -->
+<command>
+  <name>firewall-drop</name>
+  <executable>firewall-drop</executable>
+  <expect>srcip,data.src_ip</expect>
+  <timeout_allowed>yes</timeout_allowed>
+</command>
+
+<!-- Trigger firewall blocking on Suricata alerts -->
 <active-response>
-  <disabled>no</disabled>
   <command>firewall-drop</command>
   <location>local</location>
-  <level>10</level>
-  <timeout>60</timeout>
+  <rules_id>86601</rules_id>
+  <timeout>600</timeout>
 </active-response>
-```text
-Rule ID: 86601
 ```
-Configuration Details
-Active Response: Enabled
-Command: firewall-drop
-Location: local
-Alert Level: 10
-Timeout: 60 seconds
 
-The response was configured with a level threshold of 10 so that the firewall-drop action would only be triggered for alerts meeting the configured severity level, helping to avoid unnecessary responses to lower-level events.
-
-Screenshots 17 and 18 provide evidence of the Active Response configuration.
+This configuration enables Wazuh Active Response to automatically execute
+firewall-drop when Suricata rule 86601 generates an alert. The source IP
+associated with the alert is passed to the firewall-drop command and blocked
+for 600 seconds.
 
 # 9. Wazuh Manager Verification
 
