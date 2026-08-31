@@ -156,6 +156,17 @@ firewall-drop when Suricata rule 86601 generates an alert. The source IP
 associated with the alert is passed to the firewall-drop command and blocked
 for 600 seconds.
 
+## 8.1 Wazuh Active Response Verification
+### Active Response Verification
+
+After configuring Wazuh Active Response, a Suricata alert matching rule ID `86601` was generated. Wazuh processed the alert and triggered the configured `firewall-drop` response.
+
+The Wazuh dashboard was then checked to confirm that the Suricata alerts were being received and visualized successfully. Screenshots of the Active Response configuration and Wazuh dashboard visualization are included in the `screenshots` directory as evidence of the completed implementation.
+17-Wazuh-Active-Response-Configuration.png
+18-Active-Response-Configuration.png
+19-Suricata-Alerts-Over-Time.png
+
+
 # 9. Wazuh Manager Verification
 
 After making the configuration changes, the Wazuh Manager was checked to ensure that it remained active.
