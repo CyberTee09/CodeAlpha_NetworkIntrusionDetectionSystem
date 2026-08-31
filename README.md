@@ -100,19 +100,30 @@ Suricata: Alert - ET POLICY Possible Kali Linux hostname in DHCP Request Packet
 
 ### 4. Active Response
 
-Wazuh Active Response was configured using the `firewall-drop` command.
+### Active Response – Firewall Blocking
 
-The configured response included:
+Wazuh Active Response was configured to automatically execute the `firewall-drop` command when a Suricata alert matching rule ID `86601` is detected. The source IP associated with the alert is passed to the firewall-drop command and blocked for 600 seconds.
 
 ```xml
+<!-- Define the firewall-drop command -->
+<command>
+  <name>firewall-drop</name>
+  <executable>firewall-drop</executable>
+  <expect>srcip,data.src_ip</expect>
+  <timeout_allowed>yes</timeout_allowed>
+</command>
+
+<!-- Trigger firewall blocking on Suricata alerts -->
 <active-response>
   <command>firewall-drop</command>
   <location>local</location>
-  <timeout>60</timeout>
+  <rules_id>86601</rules_id>
+  <timeout>600</timeout>
 </active-response>
 ```
 
-This provides an automated response mechanism that Wazuh can use when the configured conditions for Active Response are met.
+The configuration was tested successfully, and the resulting Suricata alerts and Wazuh dashboard visualization were captured as evidence in the screenshots directory.
+
 
 ### 5. Alert Visualization
 
