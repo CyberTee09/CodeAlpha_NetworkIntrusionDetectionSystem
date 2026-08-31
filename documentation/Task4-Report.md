@@ -307,7 +307,7 @@ The following results were achieved:
 
 This project demonstrated the implementation of a Network Intrusion Detection System using Suricata and Wazuh.
 
-Suricata was responsible for monitoring network traffic and generating security events, while Wazuh provided centralized monitoring, alert analysis, dashboard visualization and an Active Response mechanism.
+Suricata monitored network traffic and generated security alerts, while Wazuh provided centralized monitoring, alert analysis, dashboard visualization, Active Response, and firewall-based traffic blocking.
 
 The integration demonstrated how an IDS can be combined with a security monitoring platform to improve visibility into network security events and provide a foundation for automated incident response.
 
