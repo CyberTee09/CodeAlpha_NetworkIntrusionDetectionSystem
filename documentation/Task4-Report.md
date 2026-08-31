@@ -17,7 +17,7 @@ The objectives of this task were to:
 * Monitor network traffic using Suricata.
 * Integrate Suricata logs with Wazuh.
 * View and analyse Suricata alerts through Wazuh.
-* Configure Wazuh Active Response using the `firewall-drop` command.
+* * Configure and test Wazuh Active Response using the `host-deny` and `firewall-drop` commands.
 * Create a visualization of Suricata alerts in the Wazuh Dashboard.
 * Document the implementation and results.
 
@@ -61,6 +61,10 @@ The Suricata installation was verified using:
 suricata --build-info
 ```
 
+**Figure 1: Suricata Build Information**
+
+![Suricata Build Information](../screenshots/01-suricata-build-info.png)
+
 The command displayed the installed Suricata version and build information, confirming that Suricata was installed and available on the system.
 
 ### 4.2 Suricata Configuration Test
@@ -70,6 +74,9 @@ Before starting network monitoring, the Suricata configuration was tested to ide
 ```bash
 sudo suricata -T
 ```
+**Figure 6: Suricata Configuration Test Success**
+
+![Suricata Configuration Test Success](../screenshots/06-Suricata-Configuration-Test-Success.png)
 
 The configuration test completed successfully, confirming that the Suricata configuration was valid.
 
@@ -79,7 +86,10 @@ Suricata detection rules were configured and loaded for network traffic analysis
 
 The rules were checked to ensure that Suricata had the necessary signatures for detecting suspicious and policy-related network activity.
 
-Suricata rules were successfully loaded and used during monitoring.
+Suricata rules were successfully loaded and used during monitoring.**Figure 2: Suricata Rules Installed**
+
+![Suricata Rules Installed](../screenshots/02-Suricata-Rules-Installed.png)
+
 
 ## 5. Suricata Monitoring
 
@@ -90,7 +100,9 @@ The status of the Suricata service was checked using:
 ```bash
 sudo systemctl status suricata
 ```
+**Figure 7: Suricata Service Running**
 
+![Suricata Service Running](../screenshots/07-Suricata-Service-Running.png)
 The service was confirmed to be active and running.
 
 Suricata generated security events which were written to its EVE JSON log:
@@ -111,6 +123,17 @@ The Wazuh Manager was confirmed to be active and running.
 
 The Suricata events were subsequently visible in the Wazuh environment, confirming that the Suricata data was being received and analysed.
 
+**Figure 8: Wazuh Server Services Running**
+
+![Wazuh Server Services Running](../screenshots/08-Wazuh-Server-Services-Running.png)
+
+**Figure 10: Wazuh Agent Running**
+
+![Wazuh Agent Running](../screenshots/10-Wazuh-Agent-Running.png)**Figure 11: Ubuntu Agent Active in Wazuh**
+
+![Ubuntu Agent Active in Wazuh](../screenshots/11-Ubuntu-Agent-Active-in-Wazuh.png)
+
+
 ## 7. Suricata Alerts in Wazuh
 
 After the Suricata and Wazuh integration was established, Suricata alerts were observed in the Wazuh logs and dashboard.
@@ -122,10 +145,17 @@ Rule ID: 86601
 Level: 3
 Description: Suricata: Alert - ET POLICY Possible Kali Linux hostname in DHCP Request Packet
 ```
+**Figure 12: Suricata Alert Events**
+
+![Suricata Alert Events](../screenshots/12-Suricata-Alert-Events.png)
 
 This demonstrated that Suricata was generating security events and that Wazuh was receiving and analysing those events.
 
 The Suricata entries were also identified in the Wazuh alert logs.
+
+**Figure 13: Wazuh Suricata Events**
+
+![Wazuh Suricata Events](../screenshots/13-Wazuh-Suricata-Events.png)
 
 ## 8. Wazuh Active Response Configuration
 
@@ -150,6 +180,9 @@ The configuration used was:
   <timeout>600</timeout>
 </active-response>
 ```
+**Figure 17: Active Response Configuration**
+
+![Active Response Configuration](../screenshots/17-Active-Response-Configuration.png)
 
 This configuration enables Wazuh Active Response to automatically execute
 firewall-drop when Suricata rule 86601 generates an alert. The source IP
@@ -157,14 +190,19 @@ associated with the alert is passed to the firewall-drop command and blocked
 for 600 seconds.
 
 ## 8.1 Wazuh Active Response Verification
-### Active Response Verification
 
 After configuring Wazuh Active Response, a Suricata alert matching rule ID `86601` was generated. Wazuh processed the alert and triggered the configured `firewall-drop` response.
 
 The Wazuh dashboard was then checked to confirm that the Suricata alerts were being received and visualized successfully. Screenshots of the Active Response configuration and Wazuh dashboard visualization are included in the `screenshots` directory as evidence of the completed implementation.
-17-Wazuh-Active-Response-Configuration.png
-18-Active-Response-Configuration.png
-19-Suricata-Alerts-Over-Time.png
+
+**Figure 18: Active Response Verification**
+
+![Active Response Verification](../screenshots/18-Active-Response-Verification.png)
+
+
+**Figure 19: Firewall Verification**
+
+![Firewall Verification](../screenshots/19-Firewall-Verification.png)
 
 
 # 9. Wazuh Manager Verification
@@ -183,7 +221,6 @@ Suricata was monitored while network traffic was being generated. Suricata event
 
 The Wazuh dashboard was used to visualize Suricata alert activity and confirm that events were being received and displayed.
 
-Screenshot 19 shows the Suricata alerts visualization over time.
 
 ## 11. Suricata Alert Visualization
 
@@ -203,11 +240,10 @@ The visualization was configured using:
 
 The visualization provides a graphical representation of alert activity over time and makes it easier to observe the volume of security events being received by Wazuh.
 
-The visualization was saved as:
+**Figure 20: Suricata Alerts Over Time**
 
-```text
-Suricata Alerts Over Time
-```
+![Suricata Alerts Over Time](../screenshots/20-Suricata-Alerts-Over-Time.png)
+
 
 ## 12. Evidence and Screenshots
 
@@ -228,7 +264,7 @@ The screenshots include evidence relating to:
 The latest visualization evidence was captured as:
 
 ```text
-19 - Suricata Alerts Over Time.png
+20-Suricata-Alerts-Over-Time.png
 ```
 
 The remaining screenshots are stored in the project's `screenshots` directory.
@@ -288,8 +324,7 @@ CodeAlpha_NetworkIntrusionDetectionSystem/
 ├── logs/
 │
 ├── screenshots/
-│   ├── Existing evidence screenshots
-│   └── 19 - Suricata Alerts Over Time.png
+│   ├── Task 4 evidence screenshots
 │
 ├── .gitignore
 ├── README.md
