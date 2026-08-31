@@ -52,7 +52,7 @@ The main objectives of the project were to:
 4. Generate and verify Suricata security events.
 5. Integrate Suricata events with Wazuh.
 6. Monitor Suricata alerts through the Wazuh Dashboard.
-7. Configure Wazuh Active Response using `firewall-drop`.
+7. Configure and test Wazuh Active Response using `host-deny` and `firewall-drop`.
 8. Create a visualization of Suricata alerts over time.
 9. Document the implementation and supporting evidence.
 
@@ -163,7 +163,6 @@ CodeAlpha_NetworkIntrusionDetectionSystem/
 
 Screenshots are maintained in the `screenshots` directory and provide evidence of the Suricata configuration, monitoring, Wazuh integration, Active Response configuration and dashboard visualization.
 
-Additional screenshots can be uploaded directly to the GitHub repository through the GitHub web interface.
 
 ## Troubleshooting
 
