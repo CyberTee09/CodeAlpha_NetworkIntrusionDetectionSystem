@@ -16,7 +16,7 @@ sudo suricata -T -c /etc/suricata/suricata.yaml
 
 echo ""
 echo "4. Checking Suricata rules..."
-ls -lh /var/lib/suricata/rules/
+ls -lh /etc/suricata/rules/
 
 echo ""
 echo "5. Checking configured rule files..."
